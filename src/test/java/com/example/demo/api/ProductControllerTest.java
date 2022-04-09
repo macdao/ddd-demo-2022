@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.api;
 
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -12,9 +12,9 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.*;
 
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -26,6 +26,12 @@ class ProductControllerTest {
     void get_product_id_1_should_return_product() throws Exception {
         var response = restTemplate.getForObject("/products/product-id-1", String.class);
         JSONAssert.assertEquals("{\"id\":\"product-id-1\",\"name\":\"product-name-1\"}", response, false);
+    }
+
+    @Test
+    void get_product_id_2_should_return_not_found() throws Exception {
+        var response = restTemplate.exchange("/products/product-id-0", GET, HttpEntity.EMPTY, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
     }
 
     @Test
