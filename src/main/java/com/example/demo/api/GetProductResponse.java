@@ -1,9 +1,11 @@
 package com.example.demo.api;
 
-import lombok.Value;
+import lombok.Builder;
+import lombok.Data;
 
-@Value
+@Data
+@Builder
 public class GetProductResponse {
-    String id;
-    String name;
+    private String id;
+    private String name;
 }

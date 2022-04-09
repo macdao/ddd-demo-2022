@@ -1,12 +1,11 @@
 package com.example.demo.api;
 
-import lombok.Value;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
-@Value
+@Data
 public class CreateProductRequest {
     @NotBlank
-    String id;
-    String name;
+    private String name;
 }

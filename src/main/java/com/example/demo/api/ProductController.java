@@ -17,14 +17,14 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<GetProductResponse> getProduct(@PathVariable String productId) {
         return productService.getProduct(productId).map(product -> {
-            GetProductResponse getProductResponse = new GetProductResponse(product.getId().value(), product.getName());
-            return ResponseEntity.ok(getProductResponse);
+            var response = GetProductResponse.builder().id(product.getId().value()).name(product.getName()).build();
+            return ResponseEntity.ok(response);
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void postProducts(@RequestBody @Valid CreateProductRequest request) {
-        productService.createProduct(request.getId(), request.getName());
+        productService.createProduct(request.getName());
     }
 }

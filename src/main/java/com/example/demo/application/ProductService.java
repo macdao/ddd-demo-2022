@@ -1,7 +1,6 @@
 package com.example.demo.application;
 
 import com.example.demo.domain.product.Product;
-import com.example.demo.domain.product.Product.ProductId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +10,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductFactory productFactory;
 
     public Optional<Product> getProduct(String productId) {
         return productRepository.findById(productId);
     }
 
-    public void createProduct(String id, String name) {
-        var product = new Product(new ProductId(id), name);
+    public void createProduct(String name) {
+        Product product = productFactory.createProduct(name);
         productRepository.save(product);
     }
 }
