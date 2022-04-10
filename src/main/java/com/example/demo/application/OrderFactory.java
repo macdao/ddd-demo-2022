@@ -1,5 +1,6 @@
 package com.example.demo.application;
 
+import com.example.demo.domain.UserId;
 import com.example.demo.domain.order.Order;
 import com.example.demo.domain.order.Order.DeliveryAddress;
 import com.example.demo.domain.order.Order.OrderId;
@@ -12,8 +13,9 @@ import org.springframework.stereotype.Component;
 public class OrderFactory {
     private final IdGenerator idGenerator;
 
-    public Order createOrder(String productId, int productPriceInFen, int amount, String contactName, String contactPhone, String address, int orderPrice) {
+    public Order createOrder(String userId, String productId, int productPriceInFen, int amount, String contactName, String contactPhone, String address, int orderPrice) {
         var deliveryAddress = new DeliveryAddress(contactName, contactPhone, address);
-        return new Order(new OrderId(idGenerator.generateId()), new ProductId(productId), productPriceInFen, amount, orderPrice, deliveryAddress);
+        var orderId = new OrderId(idGenerator.generateId());
+        return new Order(orderId, new UserId(userId), new ProductId(productId), productPriceInFen, amount, orderPrice, deliveryAddress);
     }
 }

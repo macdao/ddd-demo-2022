@@ -1,5 +1,6 @@
 package com.example.demo.domain.product;
 
+import com.example.demo.domain.Identity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
@@ -11,12 +12,9 @@ public class Product {
     private String name;
     private int priceInFen;
 
-    @Value
-    public static class ProductId {
-        String id;
-
-        public String value() {
-            return id;
+    public static class ProductId extends Identity<String> {
+        public ProductId(String value) {
+            super(value);
         }
     }
 }

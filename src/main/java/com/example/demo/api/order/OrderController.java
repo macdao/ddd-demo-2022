@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -19,6 +20,6 @@ public class OrderController {
     @ResponseStatus(CREATED)
     public void postOrders(@RequestBody @Valid CreateOrderRequest request) {
         DeliveryAddress deliveryAddress = request.getDeliveryAddress();
-        orderService.createOrder(request.getProductId(), request.getAmount(), deliveryAddress.getContactName(), deliveryAddress.getContactPhone(), deliveryAddress.getAddress());
+        orderService.createOrder("user-id", request.getProductId(), request.getAmount(), deliveryAddress.getContactName(), deliveryAddress.getContactPhone(), deliveryAddress.getAddress());
     }
 }

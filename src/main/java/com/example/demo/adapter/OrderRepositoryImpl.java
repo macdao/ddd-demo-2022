@@ -14,6 +14,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     public void save(Order order) {
         var entity = new OrderEntity();
         entity.setId(order.getId().value());
+        entity.setUserId(order.getUserId().value());
         entity.setProductId(order.getProductId().value());
         entity.setProductPriceInFen(order.getProductPriceInFen());
         entity.setAmount(order.getAmount());

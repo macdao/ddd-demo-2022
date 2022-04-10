@@ -16,6 +16,7 @@ class OrderServiceTest {
         String contactName = "Josh";
         String contactPhone = "13888888888";
         String address = "Shanghai";
+        String userId = "user-id";
         int productPriceInFen = 10000;
         var order = mock(Order.class);
 
@@ -27,10 +28,10 @@ class OrderServiceTest {
         var orderRepository = mock(OrderRepository.class);
 
         var orderFactory = mock(OrderFactory.class);
-        when(orderFactory.createOrder(productId, productPriceInFen, amount, contactName, contactPhone, address, 100000)).thenReturn(order);
+        when(orderFactory.createOrder(userId, productId, productPriceInFen, amount, contactName, contactPhone, address, 100000)).thenReturn(order);
         var orderService = new OrderService(productRepository, orderRepository, orderFactory);
 
-        orderService.createOrder(productId, amount, contactName, contactPhone, address);
+        orderService.createOrder(userId, productId, amount, contactName, contactPhone, address);
 
         verify(orderRepository).save(order);
     }

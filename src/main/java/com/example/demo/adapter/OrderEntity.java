@@ -14,6 +14,7 @@ import javax.persistence.Table;
 public class OrderEntity {
     @Id
     private String id;
+    private String userId;
     private String productId;
     private int productPriceInFen;
     private int amount;
