@@ -1,8 +1,15 @@
+buildscript {
+    dependencies {
+        classpath 'org.flywaydb:flyway-mysql:8.5.7'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
+    id "org.flywaydb.flyway" version "8.5.7"
 }
 
 group = 'com.example'
@@ -35,4 +42,10 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost/test'
+    user = 'root'
+    password = ''
 }
