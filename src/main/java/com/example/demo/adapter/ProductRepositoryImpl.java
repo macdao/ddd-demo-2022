@@ -20,7 +20,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void save(Product product) {
-        ProductEntity entity = new ProductEntity();
+        var entity = new ProductEntity();
         entity.setId(product.getId().value());
         entity.setName(product.getName());
         repository.save(entity);

@@ -1,4 +1,4 @@
-package com.example.demo.api;
+package com.example.demo.api.product;
 
 import com.example.demo.application.ProductService;
 import lombok.RequiredArgsConstructor;

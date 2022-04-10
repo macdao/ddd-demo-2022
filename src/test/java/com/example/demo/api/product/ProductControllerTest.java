@@ -1,4 +1,4 @@
-package com.example.demo.api;
+package com.example.demo.api.product;
 
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -29,7 +29,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void get_product_id_2_should_return_not_found() throws Exception {
+    void get_product_id_2_should_return_not_found() {
         var response = restTemplate.getForEntity("/products/product-id-0", String.class);
         assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
     }
