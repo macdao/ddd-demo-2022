@@ -8,4 +8,5 @@ import lombok.Data;
 public class GetProductResponse {
     private String id;
     private String name;
+    private int priceInFen;
 }

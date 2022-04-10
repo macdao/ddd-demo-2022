@@ -15,7 +15,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Optional<Product> findById(String id) {
-        return repository.findById(id).map(e -> new Product(new ProductId(e.getId()), e.getName()));
+        return repository.findById(id).map(e -> new Product(new ProductId(e.getId()), e.getName(), e.getPriceInFen()));
     }
 
     @Override

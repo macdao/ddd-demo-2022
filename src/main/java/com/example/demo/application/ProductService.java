@@ -16,8 +16,8 @@ public class ProductService {
         return productRepository.findById(productId);
     }
 
-    public void createProduct(String name) {
-        Product product = productFactory.createProduct(name);
+    public void createProduct(String name, int priceInFen) {
+        Product product = productFactory.createProduct(name, priceInFen);
         productRepository.save(product);
     }
 }

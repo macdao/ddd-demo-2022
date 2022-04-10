@@ -1,17 +1,15 @@
 package com.example.demo.domain.product;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
 
 @Getter
+@AllArgsConstructor
 public class Product {
     private final ProductId id;
     private String name;
-
-    public Product(ProductId id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private int priceInFen;
 
     @Value
     public static class ProductId {

@@ -17,7 +17,7 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<GetProductResponse> getProduct(@PathVariable String productId) {
         return productService.getProduct(productId).map(product -> {
-            var response = GetProductResponse.builder().id(product.getId().value()).name(product.getName()).build();
+            var response = GetProductResponse.builder().id(product.getId().value()).name(product.getName()).priceInFen(product.getPriceInFen()).build();
             return ResponseEntity.ok(response);
         }).orElse(ResponseEntity.notFound().build());
     }
@@ -25,6 +25,6 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void postProducts(@RequestBody @Valid CreateProductRequest request) {
-        productService.createProduct(request.getName());
+        productService.createProduct(request.getName(), request.getPriceInFen());
     }
 }
