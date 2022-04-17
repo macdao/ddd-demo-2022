@@ -2,3 +2,7 @@ spring:
   datasource:
     url: "jdbc:mysql://localhost/test"
     username: "root"
+demo:
+  pricing:
+    discount: 0.8
+    amount: 2
