@@ -1,6 +1,8 @@
 package com.example.demo.application;
 
 import com.example.demo.domain.order.Order;
+import com.example.demo.domain.pricing.OrderParam;
+import com.example.demo.domain.pricing.PricingRule;
 import com.example.demo.domain.product.Product;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,11 @@ class OrderServiceTest {
         String address = "Shanghai";
         String userId = "user-id";
         int productPriceInFen = 10000;
+        int orderPrice = 100000;
         var order = mock(Order.class);
+
+        var pricingRule = mock(PricingRule.class);
+        when(pricingRule.price(new OrderParam(productPriceInFen, amount))).thenReturn(orderPrice);
 
         var productRepository = mock(ProductRepository.class);
         var product = mock(Product.class);
@@ -28,8 +34,8 @@ class OrderServiceTest {
         var orderRepository = mock(OrderRepository.class);
 
         var orderFactory = mock(OrderFactory.class);
-        when(orderFactory.createOrder(userId, productId, productPriceInFen, amount, contactName, contactPhone, address, 100000)).thenReturn(order);
-        var orderService = new OrderService(productRepository, orderRepository, orderFactory);
+        when(orderFactory.createOrder(userId, productId, productPriceInFen, amount, contactName, contactPhone, address, orderPrice)).thenReturn(order);
+        var orderService = new OrderService(productRepository, orderRepository, orderFactory, pricingRule);
 
         orderService.createOrder(userId, productId, amount, contactName, contactPhone, address);
 

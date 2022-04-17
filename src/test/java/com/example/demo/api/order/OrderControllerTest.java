@@ -28,6 +28,7 @@ class OrderControllerTest extends ApplicationTest {
 
         jdbcTemplate.queryForObject("select * from `order` where amount = ?", (resultSet, rowNum) -> {
             assertThat(resultSet.getString("id")).isNotBlank();
+            assertThat(resultSet.getInt("order_price")).isEqualTo(40000);
             return null;
         }, 5);
     }
