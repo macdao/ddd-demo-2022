@@ -1,5 +1,9 @@
 package com.example.demo.api.product;
 
+import com.example.demo.api.ApplicationTest;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +22,7 @@ import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpStatus.*;
 
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-class ProductControllerTest {
-    @Autowired
-    TestRestTemplate restTemplate;
-
+class ProductControllerTest extends ApplicationTest {
     @Test
     void get_product_id_1_should_return_product() throws Exception {
         var headers = new LinkedMultiValueMap<String, String>();
