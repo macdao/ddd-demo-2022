@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     RequestHeaderAuthenticationFilter authFilter() throws Exception {
         var filter = new RequestHeaderAuthenticationFilter();
         filter.setPrincipalRequestHeader("x-customer-id");
+        filter.setExceptionIfHeaderMissing(false);
         filter.setAuthenticationManager(authenticationManager());
         return filter;
     }

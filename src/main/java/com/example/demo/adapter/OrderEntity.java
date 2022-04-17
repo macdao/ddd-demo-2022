@@ -1,7 +1,5 @@
 package com.example.demo.adapter;
 
-import com.example.demo.domain.order.Order;
-import com.example.demo.domain.product.Product;
 import lombok.Data;
 
 import javax.persistence.Entity;

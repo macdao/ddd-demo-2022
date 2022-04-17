@@ -1,0 +1,14 @@
+@startuml
+
+[adapter] <<..adapter..>>
+[api] <<..api..>>
+[application] <<..application..>>
+[config] <<..config..>>
+[domain] <<..domain..>>
+
+[application] --> [domain]
+[api] --> [domain]
+[api] --> [application]
+[adapter] --> [domain]
+[adapter] --> [application]
+@enduml
