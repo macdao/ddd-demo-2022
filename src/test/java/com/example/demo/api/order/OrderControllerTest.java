@@ -5,8 +5,12 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.LinkedMultiValueMap;
 
 import java.util.Map;
 
@@ -25,10 +29,13 @@ class OrderControllerTest {
 
     @Test
     void post_orders_should_return_201() {
-        var request = Map.of("productId", "product-id-1",
+        var body = Map.of("productId", "product-id-1",
                 "amount", 5,
                 "deliveryAddress", Map.of("contactName", "Josh", "contactPhone", "13888888888", "address", "Shanghai"));
-        ResponseEntity<String> response = restTemplate.postForEntity("/orders", request, String.class);
+        var headers = new LinkedMultiValueMap<String, String>();
+        headers.add("x-customer-id", "user-id-1");
+        var request = new HttpEntity<>(body, headers);
+        ResponseEntity<String> response = restTemplate.exchange("/orders", HttpMethod.POST, request, String.class);
         assertThat(response.getStatusCode()).isEqualTo(CREATED);
 
         jdbcTemplate.queryForObject("select * from `order` where amount = ?", (resultSet, rowNum) -> {

@@ -18,8 +18,8 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void postOrders(@RequestBody @Valid CreateOrderRequest request) {
+    public void postOrders(@RequestBody @Valid CreateOrderRequest request, Principal principal) {
         DeliveryAddress deliveryAddress = request.getDeliveryAddress();
-        orderService.createOrder("user-id", request.getProductId(), request.getAmount(), deliveryAddress.getContactName(), deliveryAddress.getContactPhone(), deliveryAddress.getAddress());
+        orderService.createOrder(principal.getName(), request.getProductId(), request.getAmount(), deliveryAddress.getContactName(), deliveryAddress.getContactPhone(), deliveryAddress.getAddress());
     }
 }
